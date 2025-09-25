@@ -2,6 +2,18 @@
 
 Este documento descreve os passos para preparar e executar o projeto Data Warehouse utilizando SQL Server e PostgreSQL.
 
+> ⚠️ **Pré-requisitos**  
+> É necessário ter **Docker** e **Docker Compose** instalados no ambiente antes de seguir os passos abaixo.
+
+---
+
+## 1. Subir os Contêineres
+
+No diretório onde está o `docker-compose.yml`, execute:
+
+````bash
+docker-compose up -d
+
 ---
 
 ## 1. Subir os Contêineres
@@ -10,7 +22,7 @@ No diretório onde está o `docker-compose.yml`, execute:
 
 ```bash
 docker-compose up -d
-```
+````
 
 Isso criará dois contêineres:
 
@@ -51,10 +63,6 @@ CREATE DATABASE ADS;
 
 Depois rode o script `1-backup-sql-server.sql` no banco `ADS`:
 
-```bash
-sqlcmd -S localhost,1433 -U sa -P "Admin123#" -d ADS -i 1-backup-sql-server.sql
-```
-
 ---
 
 ## 5. Criar o Banco do Data Warehouse no PostgreSQL
@@ -67,10 +75,6 @@ CREATE DATABASE dw;
 
 Rode o SQL `2-criar-dw-postgre.sql` no banco `dw`:
 
-```bash
-psql -h localhost -U postgres -p 5432 -d dw -f 2-criar-dw-postgre.sql
-```
-
 ---
 
 ## 6. Criar Tabelas Estrangeiras no PostgreSQL
@@ -81,19 +85,11 @@ Esse script:
 - Cria a extensão `tds_fdw` (já instalada na imagem)
 - Cria as tabelas estrangeiras que apontam para o SQL Server
 
-```bash
-psql -h localhost -U postgres -p 5432 -d dw -f 3-criar-foreign-tables-postgre.sql
-```
-
 ---
 
 ## 7. Popular o Data Warehouse
 
-Ainda no banco `dw`, rode o script `4-popular-dw.sql` para inserir os dados:
-
-```bash
-psql -h localhost -U postgres -p 5432 -d dw -f 4-popular-dw.sql
-```
+Ainda no banco `dw`, rode o script `4-popular-dw.sql` para inserir os dados
 
 ---
 
