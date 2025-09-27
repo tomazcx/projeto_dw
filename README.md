@@ -38,7 +38,7 @@ Use qualquer cliente SQL (DBeaver, pgAdmin, psql) com as credenciais:
 - **Usuário**: `postgres`
 - **Senha**: `admin`
 - **Host**: `localhost`
-- **Porta**: `5432`
+- **Porta**: `5433`
 
 ---
 
